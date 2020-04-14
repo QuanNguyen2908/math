@@ -1,24 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React ,{useState, useEffect} from 'react';
+import MathJax from 'react-mathjax';
+
+var tex ;
 
 function App() {
+  const [values, setValues] = useState('');
+
+  const isChange = (event) =>{
+    setValues(event.target.value);
+    console.log('valuse : ',values);
+    //console.log(event.target.value);
+  }
+  tex = values;
+
+// useEffect(() => {
+//   tex = values;
+// }, [values]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App" style ={{marginLeft : '30px'}}>
+      <input style={{width :'500px', marginTop : '50px'}} onChange={isChange}></input>
+      <MathJax.Provider>
+            <div>
+                Result math type :
+ 
+                <MathJax.Node formula={tex} />
+            </div>
+        </MathJax.Provider>
     </div>
   );
 }
